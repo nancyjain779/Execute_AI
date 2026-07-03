@@ -3,7 +3,7 @@
 **Nancy jain** · Execute Partners  
 **Live:** [executepartners.com/community](https://www.executepartners.com/community)
 
-I built the AI and content moderation layer for ExCom — Execute Partners' professional community platform. This repo contains the services I developed and deployed: a unified Gemini API and a PyTorch moderation pipeline. The React frontend and Node backend run separately in production; links below show how everything connects end-to-end.
+I built the AI and content moderation layer for ExCom — Execute Partners' professional community platform. The source code lives in [`execute-partners-backend/`](execute-partners-backend/) — a unified Gemini API and PyTorch moderation pipeline. The React frontend and Node backend run separately in production; links below show how everything connects end-to-end.
 
 ---
 
@@ -21,12 +21,12 @@ I built the AI and content moderation layer for ExCom — Execute Partners' prof
 
 ## What's in this repo
 
-I consolidated what used to be **6+ separate AI microservices** into two services in this repository:
+All code is in **[`execute-partners-backend/`](execute-partners-backend/)**. I consolidated what used to be **6+ separate AI microservices** into two services:
 
 | Service | Folder | What it does |
 |---------|--------|--------------|
-| **AI API** | `ai/` | Chat, summarize, trending, title & article generation (Gemini) |
-| **Filter API** | `filter/` | Toxicity + identity-hate moderation (PyTorch) |
+| **AI API** | [`execute-partners-backend/ai/`](execute-partners-backend/ai/) | Chat, summarize, trending, title & article generation (Gemini) |
+| **Filter API** | [`execute-partners-backend/filter/`](execute-partners-backend/filter/) | Toxicity + identity-hate moderation (PyTorch) |
 
 The Node backend and React frontend are not included here — they're separate production codebases. I link to their live URLs above so reviewers can see the full system working together.
 
@@ -58,7 +58,7 @@ A few design choices I'm particularly proud of:
 - **Moderation always runs server-side** through Node → Filter. The filter is never exposed to the client.
 - I migrated production from **8 Render services down to 3** (Node + AI + Filter), with the frontend on Vercel.
 
-More detail in [docs/INTEGRATION.md](docs/INTEGRATION.md) and [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+More detail in [execute-partners-backend/docs/INTEGRATION.md](execute-partners-backend/docs/INTEGRATION.md) and [execute-partners-backend/docs/ARCHITECTURE.md](execute-partners-backend/docs/ARCHITECTURE.md).
 
 ---
 
@@ -77,19 +77,23 @@ Base URL: `https://ep-ai-api.onrender.com`
 
 The filter API at `https://ep-ai-filter.onrender.com` exposes `POST /filtercomment` — Node calls it on every article and comment before saving to MongoDB.
 
-Full reference: [docs/API.md](docs/API.md) · Try it: [Swagger UI](https://ep-ai-api.onrender.com/docs)
+Full reference: [execute-partners-backend/docs/API.md](execute-partners-backend/docs/API.md) · Try it: [Swagger UI](https://ep-ai-api.onrender.com/docs)
 
 ---
 
 ## Project structure
 
 ```
-├── ai/                  # FastAPI + Gemini
-├── filter/              # Flask + PyTorch moderation
-│   └── models/          # toxic-bert + identity-hate weights
-├── docs/                # Architecture, API, design notes
-├── docker-compose.yml   # Run AI + filter locally
-└── .env.example
+Execute_AI/
+├── execute-partners-backend/    ← source code (start here)
+│   ├── ai/                      # FastAPI + Gemini
+│   ├── filter/                  # Flask + PyTorch moderation
+│   │   └── models/
+│   ├── docs/
+│   ├── docker-compose.yml
+│   └── .env.example
+├── LICENSE
+└── README.md
 ```
 
 ---
@@ -98,7 +102,7 @@ Full reference: [docs/API.md](docs/API.md) · Try it: [Swagger UI](https://ep-ai
 
 ```bash
 git clone https://github.com/nancyjain779/Execute_AI.git
-cd Execute_AI
+cd Execute_AI/execute-partners-backend
 cp .env.example .env
 # Add your GOOGLE_API_KEY
 

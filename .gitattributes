@@ -1,2 +1,2 @@
-filter/models/**/*.safetensors filter=lfs diff=lfs merge=lfs -text
-filter/models/**/*.bin filter=lfs diff=lfs merge=lfs -text
+execute-partners-backend/filter/models/**/*.safetensors filter=lfs diff=lfs merge=lfs -text
+execute-partners-backend/filter/models/**/*.bin filter=lfs diff=lfs merge=lfs -text
