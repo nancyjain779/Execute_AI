@@ -1,0 +1,17 @@
+.env
+.env.local
+*.pyc
+__pycache__/
+.DS_Store
+node_modules/
+dist/
+.venv/
+venv/
+*.log
+
+# Not published to GitHub — full stack lives in production (see README)
+node/
+web/
+frontend/
+
+# Model weights: tracked via Git LFS (see docs/GITHUB_PUBLISH.md)

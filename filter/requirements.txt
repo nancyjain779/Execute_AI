@@ -1,0 +1,14 @@
+flask
+fastapi
+uvicorn
+transformers
+torch
+Pillow
+langchain-google-genai
+python-dotenv
+google-generativeai 
+
+opencv-python-headless
+
+
+flask-cors
